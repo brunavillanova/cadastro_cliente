@@ -3,6 +3,23 @@ import tkinter as tk
 from tkinter import ttk
 import sqlite3
 
+conn = sqlite3.connect("clientes.bd")
+cursor = conn.cursor()
+
+# Criar a tabela se ela não existir
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS clientes (
+        cod INTEGER PRIMARY KEY,
+        nome_cliente TEXT,
+        telefone TEXT,
+        cidade TEXT
+    )
+""")
+
+# Commit para salvar as alterações e fechar a conexão
+conn.commit()
+conn.close()
+
 class Func():
         def limpar_tela(self):
             self.codigo_entry.delete(0, END)
